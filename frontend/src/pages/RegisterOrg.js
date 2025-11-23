@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+const API_BASE_URL = "https://hrms-backend-e0bo.onrender.com/api";
+
 class RegisterOrg extends Component {
   state = {
     orgName: "",
@@ -18,7 +20,7 @@ class RegisterOrg extends Component {
     event.preventDefault();
     try {
       const { orgName, adminName, email, password } = this.state;
-      const regApiUrl = "http://localhost:5000/api/auth/register";
+      const regApiUrl = `${API_BASE_URL}/auth/register`;
       const options = {
         method: "POST",
         headers: {

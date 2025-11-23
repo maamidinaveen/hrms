@@ -3,6 +3,8 @@ import React, { Component } from "react";
 
 import EmployeeForm from "../components/EmployeeForm";
 
+const API_BASE_URL = "https://hrms-backend-e0bo.onrender.com/api";
+
 class Employees extends Component {
   state = {
     // existing state
@@ -35,7 +37,7 @@ class Employees extends Component {
     }
     this.setState({ loading: true, errorMsg: "" });
     try {
-      const employeesApiUrl = "http://localhost:5000/api/employees";
+      const employeesApiUrl = `${API_BASE_URL}/employees`;
       const options = {
         method: "GET",
         headers: {
@@ -78,8 +80,8 @@ class Employees extends Component {
 
     try {
       const url = isEdit
-        ? `http://localhost:5000/api/employees/${editingEmployee.id}`
-        : "http://localhost:5000/api/employees";
+        ? `${API_BASE_URL}/employees/${editingEmployee.id}`
+        : `${API_BASE_URL}/employees`;
       const method = isEdit ? "PUT" : "POST";
       const options = {
         method,
@@ -118,7 +120,7 @@ class Employees extends Component {
     }
     if (!window.confirm("Delete this employee?")) return;
     try {
-      const deleteEmployeeApiUrl = `http://localhost:5000/api/employees/${id}`;
+      const deleteEmployeeApiUrl = `${API_BASE_URL}/employees/${id}`;
       const options = {
         method: "DELETE",
         headers: {
@@ -172,7 +174,7 @@ class Employees extends Component {
 
     try {
       // 1) all teams in organisation
-      const teamsRes = await fetch("http://localhost:5000/api/teams", {
+      const teamsRes = await fetch(`${API_BASE_URL}/teams`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -185,7 +187,7 @@ class Employees extends Component {
 
       // 2) teams that this employee belongs to
       const empTeamsRes = await fetch(
-        `http://localhost:5000/api/employees/${emp.id}/teams`,
+        `${API_BASE_URL}/employees/${emp.id}/teams`,
         {
           method: "GET",
           headers: {
@@ -229,7 +231,7 @@ class Employees extends Component {
 
     const isInTeam = employeeTeams.some((t) => t.id === team.id);
 
-    const url = `http://localhost:5000/api/teams/${team.id}/${
+    const url = `${API_BASE_URL}/teams/${team.id}/${
       isInTeam ? "unassign" : "assign"
     }`;
 

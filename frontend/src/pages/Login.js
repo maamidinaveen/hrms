@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+const API_BASE_URL = "https://hrms-backend-e0bo.onrender.com/api";
+
 class Login extends Component {
   state = {
     email: "admin@demo.com", // for seed user
@@ -30,7 +32,7 @@ class Login extends Component {
     event.preventDefault();
     try {
       const { email, password } = this.state;
-      const loginApiUrl = "http://localhost:5000/api/auth/login";
+      const loginApiUrl = `${API_BASE_URL}/auth/login`;
       const options = {
         method: "POST",
         headers: {

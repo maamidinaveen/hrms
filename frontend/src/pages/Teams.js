@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import TeamForm from "../components/TeamForm";
 
+const API_BASE_URL = "https://hrms-backend-e0bo.onrender.com/api";
+
 class Teams extends Component {
   state = {
     teams: [],
@@ -26,7 +28,7 @@ class Teams extends Component {
       loading: true,
     });
     try {
-      const loadTeamsApiUrl = "http://localhost:5000/api/teams";
+      const loadTeamsApiUrl = `${API_BASE_URL}/teams`;
       const options = {
         method: "GET",
         headers: {
@@ -71,8 +73,8 @@ class Teams extends Component {
 
     try {
       const url = isEdit
-        ? `http://localhost:5000/api/teams/${editingTeam.id}` // PUT (update)
-        : "http://localhost:5000/api/teams"; // POST (create)
+        ? `${API_BASE_URL}/teams/${editingTeam.id}` // PUT (update)
+        : `${API_BASE_URL}/teams`; // POST (create)
 
       const method = isEdit ? "PUT" : "POST";
       const options = {
@@ -116,7 +118,7 @@ class Teams extends Component {
     }
     if (!window.confirm("Delete this team?")) return;
     try {
-      const deleteTeamApiUrl = `http://localhost:5000/api/teams/${id}`;
+      const deleteTeamApiUrl = `${API_BASE_URL}/teams/${id}`;
       const options = {
         method: "DELETE",
         headers: {
